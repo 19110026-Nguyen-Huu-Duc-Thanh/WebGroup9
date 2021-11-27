@@ -12,9 +12,9 @@ import model.contentModel;
 
 public class contentDAO {
 	private String WhereSql = "";
-	private String jdbcURL = "jdbc:mysql://localhost:/myds?useUnicode=true&characterEncoding=UTF-8";
+	private String jdbcURL = "jdbc:mysql://localhost:/web";
 	private String jdbcUsername = "root";
-	private String jdbcPassword = "Quyquynh1";
+	private String jdbcPassword = "lam0917648239";
 	private static final String getContentF="SELECT id,Title,brief,CreatedDate FROM content ";
 	private static final String getContentL=" ORDER BY CreatedDate DESC LIMIT ? OFFSET  ? ";
 	private int NumPage = 0;
@@ -38,10 +38,12 @@ public class contentDAO {
     	{
     	WhereSql=" where authorid = ? ";
     	}
+        else
 		if(authorid!=1 && search != null) 
 		{ WhereSql=" where authorid = ? and (Title like ? || Brief like ? )";
 		
 		}
+		else
 		if(authorid==1 && search != null) 
 		{ WhereSql=" where  (Title like ? || Brief like ? )";
 		
@@ -56,7 +58,7 @@ public class contentDAO {
            	 preparedStatement.setInt(1, authorid);
            	preparedStatement.setInt(2, numId);     
             	 preparedStatement.setInt(3, row_num);
-            	}
+            	}else
             if(authorid!=1 && search != null)
         	{
         	
@@ -66,6 +68,7 @@ public class contentDAO {
        	preparedStatement.setInt(4, numId);     
         	 preparedStatement.setInt(5, row_num);
         	}
+            else
             if(authorid==1 && search != null)
             {
 
